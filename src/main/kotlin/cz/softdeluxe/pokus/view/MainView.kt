@@ -4,7 +4,7 @@ import cz.softdeluxe.pokus.controller.DeliciousController
 import cz.softdeluxe.pokus.lib.actionEvents
 import cz.softdeluxe.pokus.lib.observeOnFx
 import cz.softdeluxe.pokus.lib.observeOnIo
-import cz.softdeluxe.pokus.model.DeliciousBookmark
+import cz.softdeluxe.pokus.model.Post
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -20,7 +20,7 @@ class MainView : View() {
 
     override val root: BorderPane by fxml()
 
-    val table: TableView<DeliciousBookmark> by fxid()
+    val table: TableView<Post> by fxid()
 
     val controller: DeliciousController by inject()
 
@@ -32,8 +32,10 @@ class MainView : View() {
 
         with (table) {
             // Create table columns and bind to the data model
-            column(messages["description"], DeliciousBookmark::descriptionProperty).prefWidth = 500.0
-            column(messages["url"], DeliciousBookmark::urlProperty).prefWidth = 300.0
+            column(messages["id"], Post::title).prefWidth = 50.0
+            column(messages["userId"], Post::userId).prefWidth = 50.0
+            column(messages["title"], Post::title).prefWidth = 200.0
+            column(messages["body"], Post::body).prefWidth = 300.0
 
             // Handle double click on row
             onUserSelect {
@@ -61,14 +63,14 @@ class MainView : View() {
     /**
      * Open the selected bookmark in a new browser window
      */
-    private fun browse(bookmark: DeliciousBookmark) = Stage().apply {
-        log.info { "Browsing ${bookmark.url}..." }
+    private fun browse(post: Post) = Stage().apply {
+        log.info { "Browsing ${post.id}..." }
 
         val webView = WebView().apply {
-            engine.load(bookmark.url)
+            engine.load(post.id.toString())//FIXME
         }
         scene = Scene(webView)
-        title = bookmark.description
+        title = post.title
         show()
     }
 }

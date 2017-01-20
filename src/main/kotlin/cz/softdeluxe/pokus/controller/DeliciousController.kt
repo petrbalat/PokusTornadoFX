@@ -1,10 +1,9 @@
 package cz.softdeluxe.pokus.controller
 
-import cz.softdeluxe.pokus.model.DeliciousBookmark
+import cz.softdeluxe.pokus.model.Post
 import javafx.collections.ObservableList
 import tornadofx.Controller
 import tornadofx.Rest
-import tornadofx.list
 import tornadofx.toModel
 
 class DeliciousController: Controller() {
@@ -12,9 +11,9 @@ class DeliciousController: Controller() {
     val api: Rest by inject()
 
     init {
-        api.baseURI = "http://feeds.delicious.com/v2/json/"
+        api.baseURI = "https://jsonplaceholder.typicode.com/"
     }
 
-    fun recentBookmarks(): ObservableList<DeliciousBookmark> = api.get("recent").list().toModel()
+    fun recentBookmarks(): ObservableList<Post> = api.get("posts").list().toModel()
 }
 
