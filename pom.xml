@@ -10,6 +10,12 @@
 
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.1.RELEASE</version>
+    </parent>
+
     <properties>
         <kotlin.version>1.1.0-rc-91</kotlin.version>
         <tornadofx.version>1.6.1</tornadofx.version>
@@ -69,6 +75,8 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -96,6 +104,10 @@
                 <configuration>
                     <mainClass>cz.softdeluxe.pokus.MyAppKt</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
