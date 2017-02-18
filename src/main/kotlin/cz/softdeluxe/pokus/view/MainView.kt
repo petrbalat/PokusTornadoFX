@@ -1,9 +1,6 @@
 package cz.softdeluxe.pokus.view
 
 import cz.softdeluxe.pokus.controller.DeliciousController
-import cz.softdeluxe.pokus.lib.actionEvents
-import cz.softdeluxe.pokus.lib.observeOnFx
-import cz.softdeluxe.pokus.lib.observeOnIo
 import cz.softdeluxe.pokus.model.Post
 import javafx.scene.Scene
 import javafx.scene.control.Button
@@ -12,9 +9,11 @@ import javafx.scene.control.TableView
 import javafx.scene.layout.BorderPane
 import javafx.scene.web.WebView
 import javafx.stage.Stage
-import rx.Observable
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.javafx.JavaFx
 import tornadofx.*
-import java.time.LocalDateTime
+import java.util.concurrent.TimeUnit
 
 class MainView : View() {
 
@@ -48,15 +47,14 @@ class MainView : View() {
             }
         }
 
-        testBtn.actionEvents().map {
-            LocalDateTime.now().toString()
-        }.switchMap { value ->
-            Observable.fromCallable {
-                Thread.sleep(2000)
-                value
-            }.observeOnIo()
-        }.observeOnFx().subscribe {
-            testLbl.text = it
+        testBtn.setOnAction {
+            async(JavaFx) {
+                title = "start"
+
+                delay(2, TimeUnit.SECONDS)
+
+                title = "end"
+            }
         }
     }
 
