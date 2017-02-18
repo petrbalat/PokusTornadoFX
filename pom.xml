@@ -11,9 +11,10 @@
     <packaging>jar</packaging>
 
     <properties>
-        <kotlin.version>1.0.6</kotlin.version>
-        <tornadofx.version>1.6.0</tornadofx.version>
+        <kotlin.version>1.1.0-rc-91</kotlin.version>
+        <tornadofx.version>1.6.1</tornadofx.version>
         <reactfx.version>1.4.1</reactfx.version>
+        <kotlin.coroutines.version>0.9-rc</kotlin.coroutines.version>
     </properties>
 
     <dependencies>
@@ -25,12 +26,13 @@
         <dependency>
             <groupId>no.tornado</groupId>
             <artifactId>tornadofx-controls</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.5</version>
         </dependency>
+
         <dependency>
             <groupId>io.reactivex</groupId>
             <artifactId>rxjava</artifactId>
-            <version>1.2.5</version>
+            <version>1.2.6</version>
         </dependency>
         <dependency>
             <groupId>io.reactivex</groupId>
@@ -42,10 +44,27 @@
             <artifactId>rxkotlin</artifactId>
             <version>0.60.0</version>
         </dependency>
+
+        <!--kotlin-->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-jdk8</artifactId>
+            <version>${kotlin.coroutines.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-javafx</artifactId>
+            <version>${kotlin.coroutines.version}</version>
         </dependency>
     </dependencies>
 
@@ -81,11 +100,25 @@
         </plugins>
     </build>
 
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>reactfx</id>-->
-            <!--<url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-        <!--</repository>-->
-    <!--</repositories>-->
+    <repositories>
+        <repository>
+            <id>kotlin-beta</id>
+            <url>http://dl.bintray.com/kotlin/kotlin-eap-1.1</url>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>kotlin-beta-plugins</id>
+            <url>http://dl.bintray.com/kotlin/kotlin-eap-1.1</url>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
